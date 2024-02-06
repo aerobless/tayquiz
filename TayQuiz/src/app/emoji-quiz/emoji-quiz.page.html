@@ -1,0 +1,28 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">emoji-quiz</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-text color="secondary" style="text-align: center">
+    <h2>🚂🏠💔🎉🌊</h2>
+  </ion-text>
+
+  <ion-list>
+    <ion-item (click)="verify('1')">
+      <ion-label>Dress</ion-label>
+    </ion-item>
+    <ion-item (click)="verify('2')">
+      <ion-label>The Last Great American Dynasty</ion-label>
+    </ion-item>
+    <ion-item (click)="verify('3')">
+      <ion-label>Sparks Fly</ion-label>
+    </ion-item>
+    <ion-item (click)="verify('4')">
+      <ion-label>Karma</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button (click)="navigateHome()">End</ion-button>
+</ion-content>
