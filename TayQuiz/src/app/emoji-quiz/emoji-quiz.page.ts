@@ -1,9 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {IonicModule} from "@ionic/angular";
 import {QuizmasterService} from "../service/quizmaster/quizmaster.service";
 import {Question} from "../service/quizmaster/question";
 import {NgForOf} from "@angular/common";
+import {
+  IonButton, IonContent,
+  IonHeader,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonText,
+  IonTitle,
+  IonToolbar
+} from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-emoji-quiz',
@@ -11,8 +20,16 @@ import {NgForOf} from "@angular/common";
   styleUrls: ['./emoji-quiz.page.scss'],
   standalone: true,
   imports: [
-    IonicModule,
-    NgForOf
+    NgForOf,
+    IonButton,
+    IonText,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonTitle,
+    IonToolbar,
+    IonHeader,
+    IonContent
   ]
 })
 export class EmojiQuizPage implements OnInit {
@@ -35,6 +52,7 @@ export class EmojiQuizPage implements OnInit {
   }
 
   navigateHome(): void {
+    this.nextQuestionNumber = 0;
     this.router.navigate(['/home']);
   }
 
