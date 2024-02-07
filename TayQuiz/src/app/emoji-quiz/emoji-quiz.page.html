@@ -25,8 +25,15 @@
     </div>
 
     <div *ngIf="this.quizstate === QuizState.ANSWER_WRONG" (click)="nextQuestion()">
-      <ion-icon name="sad-outline" style="font-size: 128px; color: cornflowerblue"></ion-icon><br>
+      <ion-icon name="sad-outline" style="font-size: 128px; color: palevioletred"></ion-icon><br>
       <h2>Oh no!</h2>
+      <br>
+      <p>Touch to continue</p>
+    </div>
+
+    <div *ngIf="this.quizstate === QuizState.RESULT" (click)="navigateHome()">
+      <h2>Result</h2>
+      <h3>Correctly answered {{this.correctAnswers}} out of {{this.quizmaster.getQuestions().length}}.</h3>
       <br>
       <p>Touch to continue</p>
     </div>

@@ -41,7 +41,7 @@ import {QuizState} from "./model/quiz-state";
 })
 export class EmojiQuizPage implements OnInit {
 
-  constructor(private router: Router, private quizmaster: QuizmasterService) {
+  constructor(private router: Router, protected quizmaster: QuizmasterService) {
     addIcons({heartOutline});
     addIcons({sadOutline});
   }
@@ -50,6 +50,8 @@ export class EmojiQuizPage implements OnInit {
   nextQuestionNumber: number = 0;
   quizstate: QuizState = QuizState.QUESTION;
 
+  correctAnswers: number = 0;
+
   ngOnInit() {
     this.nextQuestion();
   }
@@ -57,6 +59,7 @@ export class EmojiQuizPage implements OnInit {
   verify(choice: boolean): void {
     if(choice){
       this.quizstate = QuizState.ANSWER_CORRECT;
+      this.correctAnswers++;
     }else{
       this.quizstate = QuizState.ANSWER_WRONG;
     }
@@ -64,13 +67,19 @@ export class EmojiQuizPage implements OnInit {
 
   navigateHome(): void {
     this.nextQuestionNumber = 0;
+    this.nextQuestion();
     this.router.navigate(['/home']);
   }
 
   protected nextQuestion(): void {
-    this.quizstate = QuizState.QUESTION;
-    this.currentQuestion = this.quizmaster.getQuestions()[this.nextQuestionNumber];
-    this.nextQuestionNumber++;
+    if(this.nextQuestionNumber == this.quizmaster.getQuestions().length){
+      // Out of questions...
+      this.quizstate = QuizState.RESULT;
+    } else {
+      this.quizstate = QuizState.QUESTION;
+      this.currentQuestion = this.quizmaster.getQuestions()[this.nextQuestionNumber];
+      this.nextQuestionNumber++;
+    }
   }
 
   protected readonly QuizState = QuizState;

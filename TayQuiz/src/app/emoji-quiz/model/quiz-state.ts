@@ -1,5 +1,6 @@
 export enum QuizState {
   QUESTION,
   ANSWER_CORRECT,
-  ANSWER_WRONG
+  ANSWER_WRONG,
+  RESULT
 }
