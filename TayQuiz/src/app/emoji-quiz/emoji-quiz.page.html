@@ -3,7 +3,7 @@
 
     <div *ngIf="this.quizstate === QuizState.QUESTION">
       <ion-text color="secondary" style="text-align: center">
-        <h2>{{currentQuestion?.question}}</h2>
+        <h1 style="font-size: 2em">{{currentQuestion?.question}}</h1>
       </ion-text>
 
       <br>
@@ -14,7 +14,7 @@
       </ion-list>
       <br>
       <br>
-      <ion-button (click)="navigateHome()">End</ion-button>
+      <ion-button (click)="showResults()">End</ion-button>
     </div>
 
     <div *ngIf="this.quizstate === QuizState.ANSWER_CORRECT" (click)="nextQuestion()">

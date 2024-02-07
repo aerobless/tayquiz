@@ -71,6 +71,10 @@ export class EmojiQuizPage implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  showResults(): void {
+    this.quizstate = QuizState.RESULT;
+  }
+
   protected nextQuestion(): void {
     if(this.nextQuestionNumber == this.quizmaster.getQuestions().length){
       // Out of questions...
@@ -78,7 +82,14 @@ export class EmojiQuizPage implements OnInit {
     } else {
       this.quizstate = QuizState.QUESTION;
       this.currentQuestion = this.quizmaster.getQuestions()[this.nextQuestionNumber];
+      this.pseudoRandomiseAnswerOrder();
       this.nextQuestionNumber++;
+    }
+  }
+
+  private pseudoRandomiseAnswerOrder(): void {
+    if (this.currentQuestion?.answers) {
+      this.currentQuestion.answers = this.currentQuestion.answers.sort(() => Math.random() - 0.5);
     }
   }
 
