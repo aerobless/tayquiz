@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {QuizmasterService} from "../service/quizmaster/quizmaster.service";
 import {Question} from "../service/quizmaster/question";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {
-  IonButton, IonContent,
+  IonButton,
+  IonContent,
   IonHeader,
+  IonIcon,
   IonItem,
   IonLabel,
   IonList,
@@ -13,6 +15,9 @@ import {
   IonTitle,
   IonToolbar
 } from "@ionic/angular/standalone";
+import {addIcons} from "ionicons";
+import {heartOutline, sadOutline} from "ionicons/icons";
+import {QuizState} from "./model/quiz-state";
 
 @Component({
   selector: 'app-emoji-quiz',
@@ -29,15 +34,21 @@ import {
     IonTitle,
     IonToolbar,
     IonHeader,
-    IonContent
+    IonContent,
+    IonIcon,
+    NgIf
   ]
 })
 export class EmojiQuizPage implements OnInit {
 
-  constructor(private router: Router, private quizmaster: QuizmasterService) {}
+  constructor(private router: Router, private quizmaster: QuizmasterService) {
+    addIcons({heartOutline});
+    addIcons({sadOutline});
+  }
 
   currentQuestion: Question | undefined;
   nextQuestionNumber: number = 0;
+  quizstate: QuizState = QuizState.QUESTION;
 
   ngOnInit() {
     this.nextQuestion();
@@ -45,9 +56,9 @@ export class EmojiQuizPage implements OnInit {
 
   verify(choice: boolean): void {
     if(choice){
-      alert("correct")
+      this.quizstate = QuizState.ANSWER_CORRECT;
     }else{
-      alert("false")
+      this.quizstate = QuizState.ANSWER_WRONG;
     }
   }
 
@@ -57,8 +68,10 @@ export class EmojiQuizPage implements OnInit {
   }
 
   protected nextQuestion(): void {
+    this.quizstate = QuizState.QUESTION;
     this.currentQuestion = this.quizmaster.getQuestions()[this.nextQuestionNumber];
     this.nextQuestionNumber++;
   }
 
+  protected readonly QuizState = QuizState;
 }

@@ -1,19 +1,35 @@
 <ion-content [fullscreen]="true">
   <div id="container">
-    <ion-text color="secondary" style="text-align: center">
-      <h2>{{currentQuestion?.question}}</h2>
-    </ion-text>
 
-    <br>
-    <ion-list>
-      <ion-item *ngFor="let answer of currentQuestion?.answers; let idx = index" (click)="verify(answer.correct)">
-        <ion-label>{{ answer.answer }}</ion-label>
-      </ion-item>
-    </ion-list>
+    <div *ngIf="this.quizstate === QuizState.QUESTION">
+      <ion-text color="secondary" style="text-align: center">
+        <h2>{{currentQuestion?.question}}</h2>
+      </ion-text>
 
-    <br>
-    <br>
-    <ion-button (click)="nextQuestion()">Next Question</ion-button>
-    <ion-button (click)="navigateHome()">End</ion-button>
+      <br>
+      <ion-list>
+        <ion-item *ngFor="let answer of currentQuestion?.answers; let idx = index" (click)="verify(answer.correct)">
+          <ion-label>{{ answer.answer }}</ion-label>
+        </ion-item>
+      </ion-list>
+      <br>
+      <br>
+      <ion-button (click)="navigateHome()">End</ion-button>
+    </div>
+
+    <div *ngIf="this.quizstate === QuizState.ANSWER_CORRECT" (click)="nextQuestion()">
+      <ion-icon name="heart-outline" style="font-size: 128px; color: cornflowerblue"></ion-icon><br>
+      <h2>Awesome!</h2>
+      <br>
+      <p>Touch to continue</p>
+    </div>
+
+    <div *ngIf="this.quizstate === QuizState.ANSWER_WRONG" (click)="nextQuestion()">
+      <ion-icon name="sad-outline" style="font-size: 128px; color: cornflowerblue"></ion-icon><br>
+      <h2>Oh no!</h2>
+      <br>
+      <p>Touch to continue</p>
+    </div>
+
   </div>
 </ion-content>
