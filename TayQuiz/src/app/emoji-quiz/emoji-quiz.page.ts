@@ -41,56 +41,65 @@ import {QuizState} from "./model/quiz-state";
 })
 export class EmojiQuizPage implements OnInit {
 
-  constructor(private router: Router, protected quizmaster: QuizmasterService) {
+  constructor(private router: Router, private quizmaster: QuizmasterService) {
     addIcons({heartOutline});
     addIcons({sadOutline});
   }
 
+  questions: Question[] = this.quizmaster.getQuestions();
   currentQuestion: Question | undefined;
   nextQuestionNumber: number = 0;
-  quizstate: QuizState = QuizState.QUESTION;
+  quizState: QuizState = QuizState.QUESTION;
 
   correctAnswers: number = 0;
 
   ngOnInit() {
-    this.nextQuestion();
+    this.resetQuiz();
   }
 
-  verify(choice: boolean): void {
+  protected verify(choice: boolean): void {
     if(choice){
-      this.quizstate = QuizState.ANSWER_CORRECT;
+      this.quizState = QuizState.ANSWER_CORRECT;
       this.correctAnswers++;
     }else{
-      this.quizstate = QuizState.ANSWER_WRONG;
+      this.quizState = QuizState.ANSWER_WRONG;
     }
   }
 
-  navigateHome(): void {
-    this.nextQuestionNumber = 0;
-    this.nextQuestion();
+  protected navigateHome(): void {
+    this.resetQuiz();
     this.router.navigate(['/home']);
   }
 
-  showResults(): void {
-    this.quizstate = QuizState.RESULT;
+  protected showResults(): void {
+    this.quizState = QuizState.RESULT;
   }
 
   protected nextQuestion(): void {
-    if(this.nextQuestionNumber == this.quizmaster.getQuestions().length){
+    if(this.nextQuestionNumber == this.questions.length){
       // Out of questions...
-      this.quizstate = QuizState.RESULT;
+      this.quizState = QuizState.RESULT;
     } else {
-      this.quizstate = QuizState.QUESTION;
-      this.currentQuestion = this.quizmaster.getQuestions()[this.nextQuestionNumber];
-      this.pseudoRandomiseAnswerOrder();
+      this.quizState = QuizState.QUESTION;
+      this.currentQuestion = this.questions[this.nextQuestionNumber];
+      this.pseudoRandomiseOrder(this.currentQuestion.answers);
       this.nextQuestionNumber++;
     }
   }
 
-  private pseudoRandomiseAnswerOrder(): void {
-    if (this.currentQuestion?.answers) {
-      this.currentQuestion.answers = this.currentQuestion.answers.sort(() => Math.random() - 0.5);
+  private pseudoRandomiseOrder<T>(array: T[]): void {
+    if (array) {
+      array.sort(() => Math.random() - 0.5);
     }
+  }
+
+  private resetQuiz(): void {
+    this.nextQuestionNumber = 0;
+    this.correctAnswers = 0;
+
+    this.questions = this.quizmaster.getQuestions();
+    this.pseudoRandomiseOrder(this.questions);
+    this.nextQuestion();
   }
 
   protected readonly QuizState = QuizState;

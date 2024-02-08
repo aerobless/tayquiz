@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <div id="container">
 
-    <div *ngIf="this.quizstate === QuizState.QUESTION">
+    <div *ngIf="this.quizState === QuizState.QUESTION">
       <ion-text color="secondary" style="text-align: center">
         <h1 style="font-size: 2em">{{currentQuestion?.question}}</h1>
       </ion-text>
@@ -17,23 +17,23 @@
       <ion-button (click)="showResults()">End</ion-button>
     </div>
 
-    <div *ngIf="this.quizstate === QuizState.ANSWER_CORRECT" (click)="nextQuestion()">
+    <div *ngIf="this.quizState === QuizState.ANSWER_CORRECT" (click)="nextQuestion()">
       <ion-icon name="heart-outline" style="font-size: 128px; color: cornflowerblue"></ion-icon><br>
       <h2>Awesome!</h2>
       <br>
       <p>Touch to continue</p>
     </div>
 
-    <div *ngIf="this.quizstate === QuizState.ANSWER_WRONG" (click)="nextQuestion()">
+    <div *ngIf="this.quizState === QuizState.ANSWER_WRONG" (click)="nextQuestion()">
       <ion-icon name="sad-outline" style="font-size: 128px; color: palevioletred"></ion-icon><br>
       <h2>Oh no!</h2>
       <br>
       <p>Touch to continue</p>
     </div>
 
-    <div *ngIf="this.quizstate === QuizState.RESULT" (click)="navigateHome()">
+    <div *ngIf="this.quizState === QuizState.RESULT" (click)="navigateHome()">
       <h2>Result</h2>
-      <h3>Correctly answered {{this.correctAnswers}} out of {{this.quizmaster.getQuestions().length}}.</h3>
+      <h3>Correctly answered {{this.correctAnswers}} out of {{this.questions.length}}.</h3>
       <br>
       <p>Touch to continue</p>
     </div>
