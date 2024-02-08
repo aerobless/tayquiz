@@ -43,4 +43,6 @@ jobs:
         # Allow Jekyll to build your site
         jekyll: false
         verbose: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
