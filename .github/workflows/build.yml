@@ -31,3 +31,5 @@ jobs:
         cache: 'npm'
         cache-dependency-path: TayQuiz/package-lock.json
     - run: npm install
+    - run: npm install -g @ionic/cli
+    - run: ionic build --prod
