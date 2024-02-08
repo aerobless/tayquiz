@@ -29,3 +29,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: TayQuiz/package-lock.json
+    - run: npm install
