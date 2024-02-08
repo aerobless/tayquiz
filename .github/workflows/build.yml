@@ -37,7 +37,7 @@ jobs:
       uses: crazy-max/ghaction-github-pages@v4.0.0
       with:
         # Build directory to deploy
-        build_dir: www
+        build_dir: TayQuiz/www
         # Whether to treat build_dir as an absolute path
         # absolute_build_dir: # optional, default is false
         # Allow Jekyll to build your site
