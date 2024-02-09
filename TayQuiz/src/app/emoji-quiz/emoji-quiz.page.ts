@@ -10,14 +10,16 @@ import {
   IonIcon,
   IonItem,
   IonLabel,
-  IonList,
+  IonList, IonSearchbar,
   IonText,
   IonTitle,
   IonToolbar
 } from "@ionic/angular/standalone";
 import {addIcons} from "ionicons";
-import {heartOutline, sadOutline} from "ionicons/icons";
+import {heartOutline, musicalNotesOutline, sadOutline} from "ionicons/icons";
 import {QuizState} from "./model/quiz-state";
+import type {SearchbarInputEventDetail} from "@ionic/core/components";
+import {SongSearchService} from "../service/search/song-search.service";
 
 @Component({
   selector: 'app-emoji-quiz',
@@ -36,14 +38,14 @@ import {QuizState} from "./model/quiz-state";
     IonHeader,
     IonContent,
     IonIcon,
-    NgIf
+    NgIf,
+    IonSearchbar
   ]
 })
 export class EmojiQuizPage implements OnInit {
 
-  constructor(private router: Router, private quizmaster: QuizmasterService) {
-    addIcons({heartOutline});
-    addIcons({sadOutline});
+  constructor(private router: Router, private quizmaster: QuizmasterService, private songSearch: SongSearchService) {
+    addIcons({heartOutline, musicalNotesOutline, sadOutline});
   }
 
   questions: Question[] = this.quizmaster.getQuestions();
@@ -103,4 +105,11 @@ export class EmojiQuizPage implements OnInit {
   }
 
   protected readonly QuizState = QuizState;
+
+  searchSongs($event: any) {
+    const query = $event.detail.value;
+    console.log(query)
+    var result = this.songSearch.find(query);
+    console.log(result);
+  }
 }
