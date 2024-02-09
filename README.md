@@ -1,6 +1,6 @@
 # TayQuiz
 
-## Development Environment
+## Development Environment Setup
 
 1. (Optional) Install [NVM (Node Version Manager](https://github.com/nvm-sh/nvm/tree/master) manually, via brew.sh or similar packet manager
 2. Install [NodeJS](https://nodejs.org/en) manually or via NVM. We use the latest LTS version.
@@ -17,5 +17,10 @@ tbd
 tbd
 
 
-## Development commands
+## Development Guidelines
+
+### Commands
 + Update local version: `npm version $(date +%Y.%m%d.%H%M)`
+
+### Best practices
++ When importing ionic components always use the standalone version, not the ionic module.
