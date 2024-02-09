@@ -15,3 +15,7 @@ tbd
 
 ### Build for iOS
 tbd
+
+
+## Development commands
++ Update local version: `npm version $(date +%Y.%m%d.%H%M)`

@@ -32,6 +32,7 @@ jobs:
         cache-dependency-path: TayQuiz/package-lock.json
     - run: npm install
     - run: npm install -g @ionic/cli
+    - run: npm version $(date +%Y.%m%d.%H%M)
     - run: ionic build --prod
     - name: GitHub Pages
       uses: crazy-max/ghaction-github-pages@v4.0.0
