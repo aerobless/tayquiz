@@ -107,7 +107,7 @@ export class QuizmasterService {
         new Answer("White Horse", false),
         new Answer("Back to December", false)
       ]),
-      new Question("️‍🚗😔🍂💔❤️‍️‍🔥", [
+      new Question("️‍🚗😔🍂💔❤️‍🔥", [
         new Answer("Red", true),
         new Answer("I Knew You Were Trouble", false),
         new Answer("All Too Well", false),
