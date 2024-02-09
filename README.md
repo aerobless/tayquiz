@@ -8,6 +8,7 @@
 4. Checkout this repo
 5. Switch into the folder `tayquiz/TayQuiz` folder and run `npm install`
 6. Start the application locally with `ionic serve` and visit [http://localhost:8100/](http://localhost:8100/)
+    If `ionic serve` cannot be executed on Windows, first run `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` in the same terminal.
 
 ### Build for android
 tbd
