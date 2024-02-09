@@ -29,7 +29,7 @@ export class QuizmasterService {
         new Answer("Shake It Off", false),
         new Answer("End Game", false)
       ]),
-      new Question("🌌🚗💥👗🔄", [
+      new Question("🌌🚗💄👗🔄", [
         new Answer("Style", true),
         new Answer("Blank Space", false),
         new Answer("Wildest Dreams", false),
