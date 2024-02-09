@@ -34,7 +34,8 @@ jobs:
     - run: npm install -g @ionic/cli
     - run: npm version $(date +%Y.%m%d.%H%M)
     - run: ionic build --prod
-    - run: cp TayQuiz/www/index.html TayQuiz/www/404.html
+    - run: ls -all
+    - run: cp www/index.html www/404.html
     - name: GitHub Pages
       uses: crazy-max/ghaction-github-pages@v4.0.0
       with:
